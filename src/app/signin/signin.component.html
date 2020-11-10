@@ -1,0 +1,79 @@
+<section class=" job-bg ad-details-page">
+    <div class="container">
+  
+   
+      <div class="Sign-in">
+        <div class="row">
+          <div class="col-md-8 clearfix">
+              <form  [formGroup]="SignInForm" (ngSubmit)="signIn()" novalidate>
+                  <router-outlet>
+                      <span *ngIf="showLoader" class="loading">Loading...</span>
+                  </router-outlet>
+                  <section class="user-page">
+                      <div class="container">
+                          <div class="breadcrumb-section" style="margin-left:300px;">
+                              <!-- breadcrumb -->
+                              <ol class="breadcrumb">
+                                <li>
+                                  <a routerLink="/home">Home</a>
+                                </li>
+                                <li>Sign In</li>
+                              </ol>
+                              <!-- breadcrumb -->
+                              <h2 class="title">Sign In</h2>
+                            </div>
+                        <div class="row text-center">
+                          <!-- user-login -->			
+                          <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+                            <div class="user-account">
+                              <h2>User Login</h2>
+                              <!-- form -->
+                             
+                                <div class="form-group">
+                                  <input type="text" formControlName="UserName" class="form-control" id="UserNameId" maxlength="8" placeholder="Username" >
+                                  <span class="help-block" style="color:red" *ngIf="(SignInForm.get('UserName').touched || SignInForm.get('UserName').dirty)
+                                  && SignInForm.get('UserName').errors">
+                                       <span *ngIf="SignInForm.get('UserName').errors.required">
+                                           Please enter your UserName.
+                                       </span>
+                                       <span *ngIf="SignInForm.get('UserName').errors.minlength">
+                                           The UserName must be Longer than 3 characters.
+                                       </span>
+                                   </span>
+                                </div>
+                                <div class="form-group">
+                                  <input type="password" class="form-control" formControlName="Password" id="PasswordId"  placeholder="Password" >
+                                  <span class="help-block" style="margin-right:100px;" style="color:red" *ngIf="(SignInForm.get('Password').touched || SignInForm.get('Password').dirty)
+                                  && SignInForm.get('Password').errors">
+                                       <span *ngIf="SignInForm.get('Password').errors.required">
+                                           Please enter your Password
+                                       </span>
+                                       <span *ngIf="SignInForm.get('Password').errors.minlength">
+                                        The Password must be Longer than 3 characters.
+                                       </span>
+                                   </span>
+                                </div>
+                                <button type="submit" [disabled]="!SignInForm.valid" class="btn">Login</button>
+                             
+                            
+                             
+                              <div class="user-option">
+                                <div class="checkbox pull-left">
+                                  <label for="logged"><input type="checkbox" name="logged" id="logged"> Keep me logged in </label>
+                                </div>
+                                <div class="pull-right forgot-password">
+                                  <a >Forgot password</a>
+                                </div>
+                              </div>
+                            </div>
+                            <!-- <a  class="btn-primary">Create a New Account</a> -->
+                          </div><!-- user-login -->			
+                        </div><!-- row -->	
+                      </div><!-- container -->
+                    </section><!-- signin-page -->
+              </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>

@@ -1,0 +1,288 @@
+<section class="job-bg page job-list-page">
+		<div class="container">
+			<div class="breadcrumb-section">
+				<!-- breadcrumb -->
+				<ol class="breadcrumb">
+					<li><a routerLink="/home">Home</a></li>
+					<li>Search</li>
+				</ol><!-- breadcrumb -->						
+				<h2 class="title">Search</h2>
+			</div>
+			<div class="banner-form banner-form-full job-list-form">
+				<form   >
+					<!-- category-change -->
+					<div class="dropdown category-dropdown">						
+						<a data-toggle="dropdown" ><span class="change-text">{{jobcategory}}</span> <i class="fa fa-angle-down"></i></a>
+						<ul class="dropdown-menu category-change" >								
+								<li *ngFor="let d of Designation"><a (click)="selectedDesig(d.categoryname)">{{d.categoryname}}</a></li>				
+	   
+							   </ul>	
+												
+					</div><!-- category-change -->
+					
+					<!-- language-dropdown -->
+					<div class="dropdown category-dropdown language-dropdown">
+						<a data-toggle="dropdown" ><span class="change-text">{{joblocation}}</span> <i class="fa fa-angle-down"></i></a>
+						<ul class="dropdown-menu category-change language-change">
+								<li *ngFor="let d of Loation"><a (click)="selectedLocation(d.statename)">{{d.statename}}</a></li>				
+							
+						</ul>								
+					</div><!-- language-dropdown -->
+				
+					<input type="text" class="form-control" placeholder="Type your key word" >
+					<button type="submit" (click)=searchButton() class="btn btn-primary" value="Search">Search</button>
+				</form>
+			</div><!-- banner-form -->
+			<form novalidate  [formGroup]="jobList">
+			<div class="category-info">	
+				<div class="row">
+					<div class="col-md-3 col-sm-4">
+						<div class="accordion">
+							<!-- panel-group -->
+							<div class="panel-group" id="accordion">
+							 	
+								<!-- panel -->
+								<div class="panel panel-default panel-faq">
+									<!-- panel-heading -->
+									<div class="panel-heading">
+										<div  class="panel-title">
+											<a data-toggle="collapse" data-parent="#accordion" href="#accordion-one">
+												<h4>Categories<span class="pull-right"><i class="fa fa-minus"></i></span></h4>
+											</a>
+										</div>
+									</div><!-- panel-heading -->
+
+									<div id="accordion-one" class="panel-collapse collapse in">
+										<!-- panel-body -->
+										<div class="panel-body">
+											<h5><a><i class="fa fa-caret-down"></i> All Categories</a></h5>
+											<a><i class="icofont icofont-man-in-glasses"></i>Engineer/Architects</a>
+											<ul *ngFor="let designaton of Designation ">                        
+													<li><a (click)="search(designaton.categoryname)">{{designaton.categoryname}}</a></li>					
+											</ul>											
+
+										</div><!-- panel-body -->
+									</div>
+								</div><!-- panel -->
+
+								<!-- panel -->
+								<div class="panel panel-default panel-faq">
+									<!-- panel-heading -->
+									<div class="panel-heading">
+										<div  class="panel-title">
+											<a data-toggle="collapse" data-parent="#accordion" href="#accordion-two">
+												<h4>Date Posted <span class="pull-right"><i class="fa fa-plus"></i></span></h4>
+											</a>
+										</div>
+									</div><!-- panel-heading -->
+
+									<div id="accordion-two" class="panel-collapse collapse">
+										<!-- panel-body -->
+										<div class="panel-body">												
+											<div *ngFor="let job of datePosted">
+												<input type="checkbox" (change)="onDays(job.day, $event.target.checked)">  {{job.day}}<br>
+											</div>
+												
+										</div><!-- panel-body -->
+									</div>
+								</div><!-- panel -->
+
+								<!-- panel -->
+								<div class="panel panel-default panel-faq">
+									<!-- panel-heading -->
+									<div class="panel-heading">
+										<div class="panel-title">
+											<a data-toggle="collapse" data-parent="#accordion" href="#accordion-three">
+												<h4>
+												Salary Range
+												<span class="pull-right"><i class="fa fa-plus"></i></span>
+												</h4>
+											</a>
+										</div>
+									</div><!-- panel-heading -->
+
+									<div id="accordion-three" class="panel-collapse collapse">
+										<!-- panel-body -->
+										<div class="panel-body">
+											<div class="price-range"><!--price-range-->
+												<div class="price">
+													<span>0k - <strong>100k</strong></span>													
+													<input type="range" min="0" max="100" [value]="sliderValue" (input)="sliderValue = $event.target.value" />									 											
+													<span>{{ sliderValue }}</span>	
+												</div>
+											</div><!--/price-range-->
+										</div><!-- panel-body -->
+									</div>
+								</div><!-- panel -->
+
+								<!-- panel -->
+								<div class="panel panel-default panel-faq">
+									<!-- panel-heading -->
+									<div class="panel-heading">
+										<div class="panel-title">
+											<a data-toggle="collapse" data-parent="#accordion" href="#accordion-four">
+												<h4>Employment Type<span class="pull-right"><i class="fa fa-plus"></i></span></h4>
+											</a>
+										</div>
+									</div><!-- panel-heading -->
+
+									<div id="accordion-four" class="panel-collapse collapse">
+										<!-- panel-body -->
+										<div class="panel-body">
+												<div *ngFor="let job of jobType">
+														<input type="checkbox" (change)="onType(job.employementtype, $event.target.checked)">  {{job.employementtype}}<br>
+													</div>											
+										</div><!-- panel-body -->
+									</div>
+								</div><!-- panel -->
+
+								<!-- panel -->
+								<div class="panel panel-default panel-faq">
+									<!-- panel-heading -->
+									<div class="panel-heading">
+										<div class="panel-title">
+											<a data-toggle="collapse" data-parent="#accordion" href="#accordion-five">
+												<h4>Experience Level<span class="pull-right"><i class="fa fa-plus"></i></span></h4>
+											</a>
+										</div>
+									</div><!-- panel-heading -->
+
+									<div id="accordion-five" class="panel-collapse collapse">
+										<!-- panel-body -->
+										<div class="panel-body">
+												<div *ngFor="let job of Experience">
+														<input type="checkbox" (change)="onExperience(job.experiencetype, $event.target.checked)">  {{job.experiencetype}}<br>
+													</div>											
+										</div><!-- panel-body -->
+									</div>
+								</div> <!-- panel -->
+
+								<!-- panel -->
+								<div class="panel panel-default panel-faq">
+									<!-- panel-heading -->
+									<div class="panel-heading">
+										<div class="panel-title"></div>
+										<a data-toggle="collapse" data-parent="#accordion" href="#accordion-six">
+											<h4>Company<span class="pull-right"><i class="fa fa-plus"></i></span></h4>
+										</a>
+									</div><!-- panel-heading -->
+
+									<div id="accordion-six" class="panel-collapse collapse">
+										<!-- panel-body -->
+										<div class="panel-body">
+											<div *ngFor="let job of Companies">
+												<input type="checkbox" (change)="onCompany(job.companyname, $event.target.checked)">  {{job.companyname}}<br>
+											</div>																						 
+										</div><!-- panel-body -->
+									</div>
+								</div> <!-- panel -->
+
+								<!-- panel -->
+								<div class="panel panel-default panel-faq">
+									<!-- panel-heading -->
+									<div class="panel-heading">
+										<div class="panel-title">
+											<a data-toggle="collapse" data-parent="#accordion" href="#accordion-seven">
+												<h4>Location<span class="pull-right"><i class="fa fa-plus"></i></span></h4>
+											</a>
+										</div>
+									</div><!-- panel-heading -->
+
+									<div id="accordion-seven" class="panel-collapse collapse">
+										<!-- panel-body -->
+										<div class="panel-body">
+												<div >
+														<label *ngFor="let job of Loation; let i=index" for="{{'Clocation' + i}}" class="label-cbx">
+															<input id="{{'Clocation' + i}}" type="checkbox" class="invisible" (change)="onLocation(job.statename, $event.target.checked)">
+														<div class="checkbox">
+															<svg width="20px" height="20px" viewBox="0 0 20 20">
+															<path d="M3,1 L17,1 L17,1 C18.1045695,1 19,1.8954305 19,3 L19,17 L19,17 C19,18.1045695 18.1045695,19 17,19 L3,19 L3,19 C1.8954305,19 1,18.1045695 1,17 L1,3 L1,3 C1,1.8954305 1.8954305,1 3,1 Z"></path>
+															<polyline points="4 11 8 15 16 6"></polyline>
+															</svg>
+														</div>
+														<span> {{job.statename}}</span>
+														</label>
+														<!-- <input type="checkbox" (change)="onLocation(job.statename, $event.target.checked)">  {{job.statename}}<br> -->
+													</div>
+																					
+										</div><!-- panel-body -->
+									</div>
+								</div> <!-- panel -->
+
+							 </div><!-- panel-group -->
+						</div>
+					</div><!-- accordion-->
+
+					<!-- recommended-ads -->
+					<div class="col-sm-8 col-md-7">				
+						<div class="section job-list-item">
+							<div class="featured-top">
+								<h4>Showing 1-10 of {{totaljobs}} ads</h4>
+								<div class="dropdown pull-right">
+									<div class="dropdown category-dropdown">
+										<h5>Sort by:</h5>						
+										<a data-toggle="dropdown" ><span class="change-text">Most Relevant</span><i class="fa fa-caret-square-o-down"></i></a>
+										<ul class="dropdown-menu category-change">
+											<li><a >Most Relevant</a></li>
+											<li><a >Most Popular</a></li>
+										</ul>								
+									</div><!-- category-change -->		
+								</div>							
+							</div><!-- featured-top -->	
+							<!-- <div *ngIf="jobdata; then content"> -->
+              <ul *ngIf = "jobdata; else content">	
+				  			
+					<li *ngFor="let user of jobdata| paginate: { itemsPerPage: 10, currentPage:Pageindex  }; let i = index" >
+							<div class="job-ad-item">
+								<div class="item-info">
+									<div class="item-image-box">
+										<div class="item-image">
+												<!-- <img [src]="'data:image/jpg;base64,'+imagePath"/>  -->
+											<a ><img src="data:image/png;base64,{{user.image}}" alt="Image" class="img-responsive"></a>
+										</div><!-- item-image -->
+									</div>
+
+									<div class="ad-info">
+										<span><a  class="title">{{user.categoryname}}</a> @ <a >{{user.companyname}}</a></span>
+										<div class="ad-meta">
+											<ul>
+												<li><a ><i class="fa fa-map-marker" aria-hidden="true"></i>{{user.location}} </a></li>
+												<li><a ><i class="fa fa-clock-o" aria-hidden="true"></i>{{user.employementtype}}</a></li>
+												<li><a ><i class="fa fa-money" aria-hidden="true"></i>${{user.minsalary}}-${{user.maxsalary}}</a></li>
+											</ul>
+										</div><!-- ad-meta -->									
+									</div><!-- ad-info -->
+								</div><!-- item-info -->
+							</div><!-- job-ad-item -->
+				 </li>
+				 <pagination-controls (pageChange)="Pageindex= $event"></pagination-controls>
+			  </ul>
+			  <ng-template #content ><h3 align="center" >No Relevent Records To Display...</h3></ng-template> 
+			<!-- </div>
+			<ng-template #content><strong> Records To Display...</strong></ng-template> -->
+			
+              <!-- <pagination-controls (pageChange)="Pageindex = $event"></pagination-controls>	| paginate: { itemsPerPage: 5, currentPage: p }; let i = index "			 -->
+						</div>
+					</div><!-- recommended-ads -->
+
+					<div class="col-md-2 hidden-xs hidden-sm">
+						<div class="advertisement text-center">
+							<a ><img class="img-responsive" src="assets/images/ads/1.jpg" alt="Logo"></a>
+						</div>
+					</div>
+				</div>	
+			</div>
+		</form>
+		</div><!-- container -->
+  </section><!-- main -->
+  <section id="something-sell" class="clearfix parallax-section">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-12 text-center">
+            <h2 class="title">Add your resume and let your next job find you.</h2>
+            <h4>Post your Resume for free on <a >Jobs.com</a></h4>
+            <a routerLink="/postresume" class="btn btn-primary">Add Your Resume</a>
+          </div>
+        </div><!-- row -->
+      </div><!-- contaioner -->
+    </section>

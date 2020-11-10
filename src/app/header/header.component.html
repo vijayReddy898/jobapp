@@ -1,0 +1,51 @@
+<header id="header" class="clearfix">
+  <style>
+  .himage{
+    margin: 10px;
+  }
+  </style>
+  <!-- navbar -->
+  <nav class="navbar navbar-default">
+    <div class="container">
+      <!-- navbar-header -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="https://www.google.co.in/?gfe_rd=cr&dcr=0&ei=P8eDWtbTJsScX5W-gegH"><img class="img-responsive himage" src="assets/images/ico/icon2.png" alt="Logo"></a>
+      </div>
+      <!-- /navbar-header -->
+      
+      <div class="navbar-left">
+        <div class="collapse navbar-collapse" id="navbar-collapse">
+          <ul class="nav navbar-nav" style="margin-top:20px;">
+            <li ><a routerLink="/home">Home</a></li>
+            <li><a routerLink="/service">Services</a></li>
+            <li *ngIf="global.getUserName() == 'admin';"><a routerLink="/search">Search</a></li>
+            <li><a routerLink="/about">About us</a></li>
+            <li><a routerLink="/contact">Contact Us</a></li> 
+                    
+          </ul>
+        </div>
+      </div><!-- navbar-left -->
+      
+      <!-- nav-right -->
+      <div class="nav-right">				
+        <ul class="sign-in" style="cursor: pointer">
+          <li><i class="fa fa-user"></i></li>
+          <li *ngIf="global.getUserName() == null;"><a routerLink="/signin">Sign In</a></li>
+          <li *ngIf="global.getUserName() != null;"><a (click)="signOut()">Sign Out</a></li>
+          <!-- <li><a routerLink="/home">Register</a></li> -->
+        </ul><!-- sign-in -->					
+
+        <a routerLink="/postresume" class="btn">Post Your Resume</a>
+      </div>
+      <!-- nav-right -->
+      <div *ngIf="global.getUserName() == null;" class="nav-right">Welcome to Looking For Any Job</div>
+      <div *ngIf="global.getUserName() != null;" class="nav-right">Hi, {{global.getUserName()}}!</div>
+    </div><!-- container -->
+  </nav><!-- navbar -->
+</header>
